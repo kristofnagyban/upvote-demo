@@ -31,4 +31,8 @@ public class IdeaService {
     public List<Idea> getIdeasForAdmin() {
         return ideaRepository.findAll();
     }
+
+    public void deleteIdea(Long id) {
+        ideaRepository.delete(ideaRepository.findById(id).get());
+    }
 }
