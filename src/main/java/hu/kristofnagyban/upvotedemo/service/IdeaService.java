@@ -37,6 +37,7 @@ public class IdeaService {
                     IdeaAdminInfo ideaAdminInfo = new IdeaAdminInfo();
                     ideaAdminInfo.setId(idea.getId());
                     ideaAdminInfo.setDescription(idea.getDescription());
+                    ideaAdminInfo.setApproved(idea.isApproved());
                     ideaAdminInfo.setVotes(idea.getVotes().size());
                     return ideaAdminInfo;
                 })
