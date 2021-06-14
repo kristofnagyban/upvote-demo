@@ -19,6 +19,9 @@ public class VoteService {
     }
 
     public void saveVote(Long ideaId, String sessionId) {
-        voteRepository.save(new Vote(ideaService.getById(ideaId), sessionId));
+        Vote vote = new Vote(ideaService.getById(ideaId), sessionId);
+        if (!voteRepository.findAll().contains(vote)) {
+            voteRepository.save(vote);
+        }
     }
 }
