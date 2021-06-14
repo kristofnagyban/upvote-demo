@@ -1,6 +1,6 @@
 package hu.kristofnagyban.upvotedemo.controller;
 
-import hu.kristofnagyban.upvotedemo.domain.Idea;
+import hu.kristofnagyban.upvotedemo.dto.IdeaAdminInfo;
 import hu.kristofnagyban.upvotedemo.service.IdeaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -21,7 +21,7 @@ public class AdminController {
     }
 
     @GetMapping
-    public ResponseEntity<List<Idea>> getIdeasForAdmin() {
+    public ResponseEntity<List<IdeaAdminInfo>> getIdeasForAdmin() {
         return new ResponseEntity<>(ideaService.getIdeasForAdmin(), HttpStatus.OK);
     }
 
