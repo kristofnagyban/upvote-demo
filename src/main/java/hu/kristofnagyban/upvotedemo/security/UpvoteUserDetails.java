@@ -18,7 +18,7 @@ public class UpvoteUserDetails implements UserDetails {
     public UpvoteUserDetails(User user) {
         this.username = user.getUsername();
         this.password = user.getPassword();
-        this.authorities = Arrays.asList(new SimpleGrantedAuthority(user.getRole().name()));
+        this.authorities = Arrays.asList(new SimpleGrantedAuthority("ROLE_" + user.getRole().name()));
     }
 
     public UpvoteUserDetails() {
