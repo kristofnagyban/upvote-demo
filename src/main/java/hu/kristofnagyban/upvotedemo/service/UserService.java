@@ -18,6 +18,11 @@ public class UserService {
     @Autowired
     public UserService(UserRepository userRepository) {
         this.userRepository = userRepository;
+        User admin = new User();
+        admin.setUsername("admin");
+        admin.setPassword("admin");
+        admin.setRole(Role.ADMIN);
+        userRepository.save(admin);
     }
 
     public User registerUser(UserRegisterData userRegisterData) {

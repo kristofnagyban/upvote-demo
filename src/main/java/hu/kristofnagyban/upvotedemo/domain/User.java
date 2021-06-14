@@ -4,10 +4,7 @@ import hu.kristofnagyban.upvotedemo.dto.UserCreateData;
 import hu.kristofnagyban.upvotedemo.security.Role;
 import lombok.Data;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Data
 @Entity
@@ -18,6 +15,7 @@ public class User extends UserCreateData {
     private Long id;
     private String username;
     private String password;
+    @Enumerated(EnumType.STRING)
     private Role role;
 
 }
