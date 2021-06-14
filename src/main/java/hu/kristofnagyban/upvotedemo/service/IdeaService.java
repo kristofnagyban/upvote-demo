@@ -42,6 +42,12 @@ public class IdeaService {
                 .collect(Collectors.toList());
     }
 
+    public void approveIdea(Long id) {
+        Idea idea = ideaRepository.getById(id);
+        idea.setApproved(true);
+        ideaRepository.save(idea);
+    }
+
     public void deleteIdea(Long id) {
         ideaRepository.deleteById(id);
     }

@@ -27,7 +27,7 @@ public class AdminController {
 
     @PutMapping("/idea/{id}")
     public void approveIdea(@PathVariable Long id) {
-
+        ideaService.approveIdea(id);
     }
 
     @DeleteMapping("/idea/{id}")
