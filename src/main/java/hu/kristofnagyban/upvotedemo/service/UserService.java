@@ -5,6 +5,7 @@ import hu.kristofnagyban.upvotedemo.dto.UserRegisterData;
 import hu.kristofnagyban.upvotedemo.repository.UserRepository;
 import hu.kristofnagyban.upvotedemo.security.Role;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -14,13 +15,15 @@ import javax.transaction.Transactional;
 public class UserService {
 
     private final UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;
 
     @Autowired
-    public UserService(UserRepository userRepository) {
+    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
+        this.passwordEncoder = passwordEncoder;
         User admin = new User();
         admin.setUsername("admin");
-        admin.setPassword("admin");
+        admin.setPassword(passwordEncoder.encode("admin"));
         admin.setRole(Role.ADMIN);
         userRepository.save(admin);
     }
@@ -28,7 +31,7 @@ public class UserService {
     public User registerUser(UserRegisterData userRegisterData) {
         User user = new User();
         user.setUsername(userRegisterData.getUsername());
-        user.setPassword(userRegisterData.getPassword());
+        user.setPassword(passwordEncoder.encode(userRegisterData.getPassword()));
         user.setRole(Role.BASIC);
         return userRepository.save(user);
     }
