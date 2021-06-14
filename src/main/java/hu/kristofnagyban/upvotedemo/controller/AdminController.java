@@ -20,9 +20,14 @@ public class AdminController {
         this.ideaService = ideaService;
     }
 
-    @GetMapping
-    public ResponseEntity<List<IdeaAdminInfo>> getIdeasForAdmin() {
-        return new ResponseEntity<>(ideaService.getIdeasForAdmin(), HttpStatus.OK);
+    @GetMapping("/info")
+    public ResponseEntity<List<IdeaAdminInfo>> getIdeasWithCountVotes() {
+        return new ResponseEntity<>(ideaService.getIdeasWithCountVotes(), HttpStatus.OK);
+    }
+
+    @GetMapping("/approval")
+    public ResponseEntity<List<IdeaAdminInfo>> getIdeasForApproval() {
+        return new ResponseEntity<>(ideaService.getIdeasForApproval(), HttpStatus.OK);
     }
 
     @PutMapping("/idea/{id}")

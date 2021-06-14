@@ -31,6 +31,14 @@ public class IdeaService {
         return ideaRepository.save(idea);
     }
 
+    public List<IdeaAdminInfo> getIdeasForApproval() {
+        return getIdeasForAdmin().stream().filter(idea -> !idea.isApproved()).collect(Collectors.toList());
+    }
+
+    public List<IdeaAdminInfo> getIdeasWithCountVotes() {
+        return getIdeasForAdmin().stream().filter(IdeaAdminInfo::isApproved).collect(Collectors.toList());
+    }
+
     public List<IdeaAdminInfo> getIdeasForAdmin() {
         return ideaRepository.findAll().stream()
                 .map(idea -> {
