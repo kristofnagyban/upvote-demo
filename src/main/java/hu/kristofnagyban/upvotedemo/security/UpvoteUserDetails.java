@@ -1,18 +1,24 @@
 package hu.kristofnagyban.upvotedemo.security;
 
+import hu.kristofnagyban.upvotedemo.domain.User;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.List;
 
 public class UpvoteUserDetails implements UserDetails {
 
     private String username;
+    private String password;
+    private List<GrantedAuthority> authorities;
 
-    public UpvoteUserDetails(String username) {
-        this.username = username;
+    public UpvoteUserDetails(User user) {
+        this.username = user.getUsername();
+        this.password = user.getPassword();
+        this.authorities = Arrays.asList(new SimpleGrantedAuthority(user.getRole().name()));
     }
 
     public UpvoteUserDetails() {
@@ -20,17 +26,17 @@ public class UpvoteUserDetails implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return Arrays.asList(new SimpleGrantedAuthority("ROLE_USER"));
-    }
-
-    @Override
-    public String getPassword() {
-        return null;
+        return authorities;
     }
 
     @Override
     public String getUsername() {
         return username;
+    }
+
+    @Override
+    public String getPassword() {
+        return password;
     }
 
     @Override
