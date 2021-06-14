@@ -6,10 +6,9 @@ import hu.kristofnagyban.upvotedemo.service.VoteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @RestController
@@ -28,5 +27,10 @@ public class VoteController {
     @GetMapping
     public ResponseEntity<List<IdeaBasicInfo>> getIdeasForVoting() {
         return new ResponseEntity<>(ideaService.getApprovedIdeas(), HttpStatus.OK);
+    }
+
+    @PostMapping("/{id}")
+    public void sendVote(@PathVariable Long id, HttpSession session) {
+        voteService.saveVote(id, session.getId());
     }
 }

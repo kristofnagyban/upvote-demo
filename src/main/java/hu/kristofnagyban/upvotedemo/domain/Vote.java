@@ -14,4 +14,12 @@ public class Vote {
     @ManyToOne
     private Idea idea;
     private String sessionId;
+
+    public Vote() {
+    }
+
+    public Vote(Idea idea, String sessionId) {
+        this.idea = idea;
+        this.sessionId = sessionId;
+    }
 }

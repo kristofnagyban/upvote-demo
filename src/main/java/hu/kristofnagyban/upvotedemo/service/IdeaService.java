@@ -60,4 +60,8 @@ public class IdeaService {
                 .map(idea -> new IdeaBasicInfo(idea.getId(), idea.getDescription()))
                 .collect(Collectors.toList());
     }
+
+    public Idea getById(Long id) {
+        return ideaRepository.findById(id).get();
+    }
 }
