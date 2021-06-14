@@ -2,6 +2,7 @@ package hu.kristofnagyban.upvotedemo.service;
 
 import hu.kristofnagyban.upvotedemo.domain.Idea;
 import hu.kristofnagyban.upvotedemo.dto.IdeaAdminInfo;
+import hu.kristofnagyban.upvotedemo.dto.IdeaBasicInfo;
 import hu.kristofnagyban.upvotedemo.dto.IdeaCreateData;
 import hu.kristofnagyban.upvotedemo.repository.IdeaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,5 +51,12 @@ public class IdeaService {
 
     public void deleteIdea(Long id) {
         ideaRepository.deleteById(id);
+    }
+
+    public List<IdeaBasicInfo> getApprovedIdeas() {
+        return ideaRepository.findAll().stream()
+                .filter(Idea::isApproved)
+                .map(idea -> new IdeaBasicInfo(idea.getId(), idea.getDescription()))
+                .collect(Collectors.toList());
     }
 }

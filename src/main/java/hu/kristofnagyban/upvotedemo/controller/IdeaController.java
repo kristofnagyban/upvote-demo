@@ -1,12 +1,14 @@
 package hu.kristofnagyban.upvotedemo.controller;
 
+import hu.kristofnagyban.upvotedemo.dto.IdeaBasicInfo;
 import hu.kristofnagyban.upvotedemo.dto.IdeaCreateData;
 import hu.kristofnagyban.upvotedemo.service.IdeaService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/idea")
@@ -22,5 +24,10 @@ public class IdeaController {
     @PostMapping
     public void sendIdea(@RequestBody IdeaCreateData ideaCreateData) {
         ideaService.saveIdea(ideaCreateData);
+    }
+
+    @GetMapping
+    public ResponseEntity<List<IdeaBasicInfo>> getApprovedIdeas() {
+        return new ResponseEntity<>(ideaService.getApprovedIdeas(), HttpStatus.OK);
     }
 }

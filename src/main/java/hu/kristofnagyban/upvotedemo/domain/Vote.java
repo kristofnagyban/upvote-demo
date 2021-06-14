@@ -1,8 +1,6 @@
 package hu.kristofnagyban.upvotedemo.domain;
 
 import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.ToString;
 
 import javax.persistence.*;
 
@@ -10,7 +8,7 @@ import javax.persistence.*;
 @Entity
 public class Vote {
 
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     private Long id;
     @ManyToOne
