@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.List;
 
 @Service
 @Transactional
@@ -25,5 +26,9 @@ public class IdeaService {
         System.out.println(idea.getDescription());
         idea.setApproved(false);
         return ideaRepository.save(idea);
+    }
+
+    public List<Idea> getIdeasForAdmin() {
+        return ideaRepository.findAll();
     }
 }
