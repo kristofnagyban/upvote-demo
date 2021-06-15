@@ -14,6 +14,10 @@ public class UpvoteUserDetails implements UserDetails {
     private String username;
     private String password;
     private List<GrantedAuthority> authorities;
+    private boolean isAccountNonExpired = true;
+    private boolean isAccountNonLocked = true;
+    private boolean isCredentialsNonExpired = true;
+    private boolean isEnabled = true;
 
     public UpvoteUserDetails(User user) {
         this.username = user.getUsername();
@@ -41,21 +45,21 @@ public class UpvoteUserDetails implements UserDetails {
 
     @Override
     public boolean isAccountNonExpired() {
-        return true;
+        return isAccountNonExpired;
     }
 
     @Override
     public boolean isAccountNonLocked() {
-        return true;
+        return isAccountNonLocked;
     }
 
     @Override
     public boolean isCredentialsNonExpired() {
-        return true;
+        return isCredentialsNonExpired;
     }
 
     @Override
     public boolean isEnabled() {
-        return true;
+        return isEnabled;
     }
 }
