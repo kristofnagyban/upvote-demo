@@ -36,10 +36,6 @@ public class IdeaService {
         return ideaAdminInfoMapper(ideaRepository.findByApprovedFalse());
     }
 
-    public List<IdeaAdminInfo> getIdeasWithStats() {
-        return ideaAdminInfoMapper(ideaRepository.findByApprovedTrue());
-    }
-
     public void approveIdea(Long id) {
         Idea idea = ideaRepository.getById(id);
         idea.setApproved(true);
@@ -50,11 +46,8 @@ public class IdeaService {
         ideaRepository.deleteById(id);
     }
 
-    public List<IdeaBasicInfo> getApprovedIdeas() {
-        return ideaRepository.findAll().stream()
-                .filter(Idea::isApproved)
-                .map(idea -> new IdeaBasicInfo(idea.getId(), idea.getDescription()))
-                .collect(Collectors.toList());
+    public List<IdeaAdminInfo> getIdeasWithStats() {
+        return ideaAdminInfoMapper(ideaRepository.findByApprovedTrue());
     }
 
     public List<IdeaBasicInfo> getIdeasForVoting(String sessionId) {
@@ -76,6 +69,13 @@ public class IdeaService {
 
     public Idea getById(Long id) {
         return ideaRepository.findById(id).get();
+    }
+
+    private List<IdeaBasicInfo> getApprovedIdeas() {
+        List<Idea> approvedIdeas = ideaRepository.findAll().stream()
+                .filter(Idea::isApproved)
+                .collect(Collectors.toList());
+        return ideaBasicInfoMapper(approvedIdeas);
     }
 
     private List<IdeaBasicInfo> ideaBasicInfoMapper(List<Idea> ideas) {
