@@ -72,4 +72,23 @@ public class IdeaService {
     public Idea getById(Long id) {
         return ideaRepository.findById(id).get();
     }
+
+    private List<IdeaBasicInfo> ideaBasicInfoMapper(List<Idea> ideas) {
+        return ideas.stream()
+                .map(idea -> new IdeaBasicInfo(idea.getId(), idea.getDescription()))
+                .collect(Collectors.toList());
+    }
+
+    private List<IdeaAdminInfo> ideaAdminInfoMapper(List<Idea> ideas) {
+        return ideas.stream()
+                .map(idea -> {
+                    IdeaAdminInfo ideaAdminInfo = new IdeaAdminInfo();
+                    ideaAdminInfo.setId(idea.getId());
+                    ideaAdminInfo.setDescription(idea.getDescription());
+                    ideaAdminInfo.setApproved(idea.isApproved());
+                    ideaAdminInfo.setVotes(idea.getVotes().size());
+                    return ideaAdminInfo;
+                })
+                .collect(Collectors.toList());
+    }
 }
