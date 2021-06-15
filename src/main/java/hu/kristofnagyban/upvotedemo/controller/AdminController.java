@@ -22,7 +22,7 @@ public class AdminController {
 
     @GetMapping("/info")
     public ResponseEntity<List<IdeaAdminInfo>> getIdeasWithCountVotes() {
-        return new ResponseEntity<>(ideaService.getIdeasWithCountVotes(), HttpStatus.OK);
+        return new ResponseEntity<>(ideaService.getIdeasWithStats(), HttpStatus.OK);
     }
 
     @GetMapping("/approval")

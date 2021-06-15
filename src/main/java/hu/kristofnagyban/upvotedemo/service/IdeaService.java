@@ -32,24 +32,11 @@ public class IdeaService {
     }
 
     public List<IdeaAdminInfo> getIdeasForApproval() {
-        return getIdeasForAdmin().stream().filter(idea -> !idea.isApproved()).collect(Collectors.toList());
+        return ideaAdminInfoMapper(ideaRepository.findByApprovedFalse());
     }
 
-    public List<IdeaAdminInfo> getIdeasWithCountVotes() {
-        return getIdeasForAdmin().stream().filter(IdeaAdminInfo::isApproved).collect(Collectors.toList());
-    }
-
-    public List<IdeaAdminInfo> getIdeasForAdmin() {
-        return ideaRepository.findAll().stream()
-                .map(idea -> {
-                    IdeaAdminInfo ideaAdminInfo = new IdeaAdminInfo();
-                    ideaAdminInfo.setId(idea.getId());
-                    ideaAdminInfo.setDescription(idea.getDescription());
-                    ideaAdminInfo.setApproved(idea.isApproved());
-                    ideaAdminInfo.setVotes(idea.getVotes().size());
-                    return ideaAdminInfo;
-                })
-                .collect(Collectors.toList());
+    public List<IdeaAdminInfo> getIdeasWithStats() {
+        return ideaAdminInfoMapper(ideaRepository.findByApprovedTrue());
     }
 
     public void approveIdea(Long id) {
