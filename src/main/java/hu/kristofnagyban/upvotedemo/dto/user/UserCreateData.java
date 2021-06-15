@@ -1,4 +1,4 @@
-package hu.kristofnagyban.upvotedemo.dto;
+package hu.kristofnagyban.upvotedemo.dto.user;
 
 import hu.kristofnagyban.upvotedemo.security.Role;
 import lombok.Data;

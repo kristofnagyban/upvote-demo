@@ -1,9 +1,9 @@
 package hu.kristofnagyban.upvotedemo.service;
 
 import hu.kristofnagyban.upvotedemo.domain.Idea;
-import hu.kristofnagyban.upvotedemo.dto.IdeaAdminInfo;
-import hu.kristofnagyban.upvotedemo.dto.IdeaBasicInfo;
-import hu.kristofnagyban.upvotedemo.dto.IdeaCreateData;
+import hu.kristofnagyban.upvotedemo.dto.idea.IdeaAdminInfo;
+import hu.kristofnagyban.upvotedemo.dto.idea.IdeaBasicInfo;
+import hu.kristofnagyban.upvotedemo.dto.idea.IdeaCreateData;
 import hu.kristofnagyban.upvotedemo.repository.IdeaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

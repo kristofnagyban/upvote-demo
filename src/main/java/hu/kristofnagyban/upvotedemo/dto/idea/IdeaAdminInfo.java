@@ -1,4 +1,4 @@
-package hu.kristofnagyban.upvotedemo.dto;
+package hu.kristofnagyban.upvotedemo.dto.idea;
 
 import lombok.Data;
 

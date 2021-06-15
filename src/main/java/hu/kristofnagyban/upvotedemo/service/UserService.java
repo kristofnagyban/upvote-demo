@@ -1,7 +1,7 @@
 package hu.kristofnagyban.upvotedemo.service;
 
 import hu.kristofnagyban.upvotedemo.domain.User;
-import hu.kristofnagyban.upvotedemo.dto.UserRegisterData;
+import hu.kristofnagyban.upvotedemo.dto.user.UserRegisterData;
 import hu.kristofnagyban.upvotedemo.repository.UserRepository;
 import hu.kristofnagyban.upvotedemo.security.Role;
 import org.springframework.beans.factory.annotation.Autowired;

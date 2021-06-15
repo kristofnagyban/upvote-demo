@@ -1,6 +1,6 @@
 package hu.kristofnagyban.upvotedemo.domain;
 
-import hu.kristofnagyban.upvotedemo.dto.UserCreateData;
+import hu.kristofnagyban.upvotedemo.dto.user.UserCreateData;
 import hu.kristofnagyban.upvotedemo.security.Role;
 import lombok.Data;
 

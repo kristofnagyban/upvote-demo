@@ -1,6 +1,6 @@
 package hu.kristofnagyban.upvotedemo.controller;
 
-import hu.kristofnagyban.upvotedemo.dto.IdeaBasicInfo;
+import hu.kristofnagyban.upvotedemo.dto.idea.IdeaBasicInfo;
 import hu.kristofnagyban.upvotedemo.service.IdeaService;
 import hu.kristofnagyban.upvotedemo.service.VoteService;
 import org.springframework.beans.factory.annotation.Autowired;

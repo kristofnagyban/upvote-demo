@@ -1,6 +1,6 @@
 package hu.kristofnagyban.upvotedemo.controller;
 
-import hu.kristofnagyban.upvotedemo.dto.UserRegisterData;
+import hu.kristofnagyban.upvotedemo.dto.user.UserRegisterData;
 import hu.kristofnagyban.upvotedemo.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

@@ -13,6 +13,7 @@ public class Idea {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     private Long id;
+    @Column(columnDefinition = "TEXT")
     private String description;
     private boolean approved;
     @OneToMany(mappedBy = "idea")
