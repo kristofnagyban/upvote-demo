@@ -22,6 +22,7 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
         this.passwordEncoder = passwordEncoder;
     }
 
+    // TODO final push with final settings!
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception {
         httpSecurity
@@ -29,16 +30,22 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
                 .headers().frameOptions().disable()
                 .and()
                 .authorizeRequests()
-                .antMatchers("/api/admin", "/api/admin/**").hasRole(Role.ADMIN.name())
-                .antMatchers("/api/vote").hasRole(Role.BASIC.name())
-                .antMatchers("/api/register").permitAll()
-                .antMatchers("/db", "/db/**").permitAll()
+//                .antMatchers("/api/admin", "/api/admin/**").hasRole(Role.ADMIN.name())
+//                .antMatchers("/api/vote").hasRole(Role.BASIC.name())
+                    .antMatchers("/api/register").permitAll()
+                    .antMatchers("/db", "/db/**").permitAll()
                 .and()
                 .authorizeRequests()
-                .antMatchers("/console/**").permitAll()
+                    .antMatchers("/console/**").permitAll()
                 .and()
-                .formLogin();
-        httpSecurity.headers().frameOptions().disable();
+                .formLogin()
+                .and()
+                .logout()
+                    .logoutUrl("/logout")
+                    .clearAuthentication(true)
+                    .invalidateHttpSession(true)
+                    .deleteCookies("JSESSIONID")
+                    .logoutSuccessUrl("/login");
     }
 
     @Override

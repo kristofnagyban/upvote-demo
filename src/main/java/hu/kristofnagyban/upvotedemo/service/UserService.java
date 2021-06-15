@@ -9,6 +9,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.Optional;
 
 @Service
 @Transactional
@@ -26,6 +27,15 @@ public class UserService {
         admin.setPassword(passwordEncoder.encode("admin"));
         admin.setRole(Role.ADMIN);
         userRepository.save(admin);
+    }
+
+    public boolean isUsernameAvailable(String username) {
+        Optional<User> user = userRepository.findByUsername(username);
+        if (user.isPresent()) {
+            return false;
+        } else {
+            return true;
+        }
     }
 
     public User registerUser(UserRegisterData userRegisterData) {

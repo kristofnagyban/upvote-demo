@@ -26,7 +26,6 @@ public class IdeaService {
     public Idea saveIdea(IdeaCreateData ideaCreateData) {
         Idea idea = new Idea();
         idea.setDescription(ideaCreateData.getDescription());
-        System.out.println(idea.getDescription());
         idea.setApproved(false);
         return ideaRepository.save(idea);
     }

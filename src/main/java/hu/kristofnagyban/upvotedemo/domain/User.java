@@ -13,6 +13,7 @@ public class User extends UserCreateData {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     private Long id;
+    @Column(unique = true)
     private String username;
     private String password;
     @Enumerated(EnumType.STRING)
