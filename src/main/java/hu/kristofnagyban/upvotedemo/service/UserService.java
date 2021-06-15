@@ -31,11 +31,7 @@ public class UserService {
 
     public boolean isUsernameAvailable(String username) {
         Optional<User> user = userRepository.findByUsername(username);
-        if (user.isPresent()) {
-            return false;
-        } else {
-            return true;
-        }
+        return !user.isPresent();
     }
 
     public Optional<User> registerUser(UserRegisterData userRegisterData) {

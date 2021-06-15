@@ -1,5 +1,6 @@
 package hu.kristofnagyban.upvotedemo.domain;
 
+import com.sun.istack.NotNull;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -13,7 +14,9 @@ public class Vote {
     @Id
     private Long id;
     @ManyToOne
+    @NotNull
     private Idea idea;
+    @NotNull
     private String sessionId;
 
     public Vote() {

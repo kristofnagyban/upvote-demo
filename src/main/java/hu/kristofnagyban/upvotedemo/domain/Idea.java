@@ -1,5 +1,6 @@
 package hu.kristofnagyban.upvotedemo.domain;
 
+import com.sun.istack.NotNull;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -14,6 +15,7 @@ public class Idea {
     @Id
     private Long id;
     @Column(columnDefinition = "TEXT")
+    @NotNull
     private String description;
     private boolean approved;
     @OneToMany(mappedBy = "idea")
