@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/api/register")
-public class RegistrationController {
+public class RegistrationController extends ExceptionHandlerController {
 
     private final UserService userService;
 

@@ -13,7 +13,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/vote")
-public class VoteController {
+public class VoteController extends ExceptionHandlerController {
 
     private final VoteService voteService;
     private final IdeaService ideaService;

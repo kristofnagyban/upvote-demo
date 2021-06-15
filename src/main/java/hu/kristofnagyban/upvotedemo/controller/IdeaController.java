@@ -12,7 +12,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/idea")
-public class IdeaController {
+public class IdeaController extends ExceptionHandlerController {
 
     private final IdeaService ideaService;
 

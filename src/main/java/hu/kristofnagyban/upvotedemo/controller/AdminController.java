@@ -11,7 +11,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/admin")
-public class AdminController {
+public class AdminController extends ExceptionHandlerController {
 
     private final IdeaService ideaService;
 
