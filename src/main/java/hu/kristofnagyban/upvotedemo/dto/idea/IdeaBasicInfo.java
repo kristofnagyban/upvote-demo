@@ -7,6 +7,7 @@ public class IdeaBasicInfo {
 
     private Long id;
     private String description;
+    private boolean votable;
 
     public IdeaBasicInfo() {
     }

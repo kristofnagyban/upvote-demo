@@ -25,8 +25,8 @@ public class VoteController extends ExceptionHandlerController {
     }
 
     @GetMapping
-    public ResponseEntity<List<IdeaBasicInfo>> getIdeasForVoting() {
-        return new ResponseEntity<>(ideaService.getApprovedIdeas(), HttpStatus.OK);
+    public ResponseEntity<List<IdeaBasicInfo>> getIdeasForVoting(HttpSession session) {
+        return new ResponseEntity<>(ideaService.getIdeasForVoting(session.getId()), HttpStatus.OK);
     }
 
     @PostMapping("/{id}")

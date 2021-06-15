@@ -17,10 +17,12 @@ import java.util.stream.Collectors;
 public class IdeaService {
 
     private final IdeaRepository ideaRepository;
+    private final VoteService voteService;
 
     @Autowired
-    public IdeaService(IdeaRepository ideaRepository) {
+    public IdeaService(IdeaRepository ideaRepository, VoteService voteService) {
         this.ideaRepository = ideaRepository;
+        this.voteService = voteService;
     }
 
     public Idea saveIdea(IdeaCreateData ideaCreateData) {
@@ -55,6 +57,23 @@ public class IdeaService {
                 .collect(Collectors.toList());
     }
 
+    public List<IdeaBasicInfo> getIdeasForVoting(String sessionId) {
+        List<IdeaBasicInfo> approvedIdeas = getApprovedIdeas();
+        List<Long> votedIdeasInSession = voteService.getAllVotes().stream()
+                .filter(vote -> vote.getSessionId().equals(sessionId))
+                .mapToLong(vote -> vote.getIdea().getId())
+                .boxed()
+                .collect(Collectors.toList());
+        return approvedIdeas.stream()
+                .map(idea -> {
+                    if (!votedIdeasInSession.contains(idea.getId())) {
+                        idea.setVotable(true);
+                    }
+                    return idea;
+                })
+                .collect(Collectors.toList());
+    }
+
     public Idea getById(Long id) {
         return ideaRepository.findById(id).get();
     }
@@ -77,4 +96,5 @@ public class IdeaService {
                 })
                 .collect(Collectors.toList());
     }
+
 }
