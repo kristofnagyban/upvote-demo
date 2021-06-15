@@ -38,11 +38,15 @@ public class UserService {
         }
     }
 
-    public User registerUser(UserRegisterData userRegisterData) {
-        User user = new User();
-        user.setUsername(userRegisterData.getUsername());
-        user.setPassword(passwordEncoder.encode(userRegisterData.getPassword()));
-        user.setRole(Role.BASIC);
-        return userRepository.save(user);
+    public Optional<User> registerUser(UserRegisterData userRegisterData) {
+        if (isUsernameAvailable(userRegisterData.getUsername())) {
+            User user = new User();
+            user.setUsername(userRegisterData.getUsername());
+            user.setPassword(passwordEncoder.encode(userRegisterData.getPassword()));
+            user.setRole(Role.BASIC);
+            return Optional.of(userRepository.save(user));
+        } else {
+            return Optional.empty();
+        }
     }
 }

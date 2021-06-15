@@ -19,8 +19,12 @@ public class RegistrationController extends ExceptionHandlerController {
     }
 
     @PostMapping
-    public void registerUser(@RequestBody UserRegisterData userRegisterData) {
-        userService.registerUser(userRegisterData);
+    public ResponseEntity<Void> registerUser(@RequestBody UserRegisterData userRegisterData) {
+        if (userService.registerUser(userRegisterData).isPresent()) {
+            return new ResponseEntity<>(HttpStatus.CREATED);
+        } else {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
     }
 
     @GetMapping
