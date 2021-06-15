@@ -1,6 +1,7 @@
 package hu.kristofnagyban.upvotedemo.service;
 
 import hu.kristofnagyban.upvotedemo.domain.Vote;
+import hu.kristofnagyban.upvotedemo.exception.MultipleVotingException;
 import hu.kristofnagyban.upvotedemo.repository.VoteRepository;
 import org.springframework.stereotype.Service;
 
@@ -22,6 +23,8 @@ public class VoteService {
         Vote vote = new Vote(ideaService.getById(ideaId), sessionId);
         if (!voteRepository.findAll().contains(vote)) {
             voteRepository.save(vote);
+        } else {
+            throw new MultipleVotingException("You tried to vote multiple times in the same session.");
         }
     }
 }
