@@ -30,7 +30,8 @@ public class VoteController extends ExceptionHandlerController {
     }
 
     @PostMapping("/{id}")
-    public void sendVote(@PathVariable Long id, HttpSession session) {
+    public ResponseEntity<Void> sendVote(@PathVariable Long id, HttpSession session) {
         voteService.saveVote(id, session.getId());
+        return new ResponseEntity<>(HttpStatus.CREATED);
     }
 }

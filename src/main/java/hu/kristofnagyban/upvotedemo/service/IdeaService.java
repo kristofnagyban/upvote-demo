@@ -26,11 +26,11 @@ public class IdeaService {
         this.voteService = voteService;
     }
 
-    public Idea saveIdea(IdeaCreateData ideaCreateData) {
+    public Optional<Idea> saveIdea(IdeaCreateData ideaCreateData) {
         Idea idea = new Idea();
         idea.setDescription(ideaCreateData.getDescription());
         idea.setApproved(false);
-        return ideaRepository.save(idea);
+        return Optional.of(ideaRepository.save(idea));
     }
 
     public List<IdeaAdminInfo> getIdeasForApproval() {
@@ -69,7 +69,7 @@ public class IdeaService {
     }
 
     public Idea getById(Long id) {
-        return ideaRepository.findById(id).get();
+        return ideaRepository.findById(id).orElse(new Idea());
     }
 
     private List<IdeaBasicInfo> getApprovedIdeas() {

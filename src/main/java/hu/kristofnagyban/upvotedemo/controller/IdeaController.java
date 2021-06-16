@@ -3,6 +3,8 @@ package hu.kristofnagyban.upvotedemo.controller;
 import hu.kristofnagyban.upvotedemo.dto.idea.IdeaCreateData;
 import hu.kristofnagyban.upvotedemo.service.IdeaService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,8 +22,12 @@ public class IdeaController extends ExceptionHandlerController {
     }
 
     @PostMapping
-    public void sendIdea(@RequestBody IdeaCreateData ideaCreateData) {
-        ideaService.saveIdea(ideaCreateData);
+    public ResponseEntity<Void> sendIdea(@RequestBody IdeaCreateData ideaCreateData) {
+        if(ideaService.saveIdea(ideaCreateData).isPresent()) {
+            return new ResponseEntity<>(HttpStatus.CREATED);
+        } else {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
     }
 
 }

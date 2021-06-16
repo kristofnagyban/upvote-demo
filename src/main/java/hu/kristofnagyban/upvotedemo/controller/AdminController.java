@@ -34,7 +34,7 @@ public class AdminController extends ExceptionHandlerController {
     public ResponseEntity<Void> approveIdea(@PathVariable Long id) {
 
         if (ideaService.approveIdea(id).isPresent()) {
-            return new ResponseEntity<>(HttpStatus.CREATED);
+            return new ResponseEntity<>(HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
