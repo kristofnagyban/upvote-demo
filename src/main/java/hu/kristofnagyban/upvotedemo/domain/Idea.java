@@ -21,6 +21,16 @@ public class Idea {
     @OneToMany(mappedBy = "idea")
     private List<Vote> votes;
 
+    public Idea() {
+    }
+
+    public Idea(Long id, String description, boolean approved, List<Vote> votes) {
+        this.id = id;
+        this.description = description;
+        this.approved = approved;
+        this.votes = votes;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

@@ -21,10 +21,10 @@ public class VoteService {
         this.ideaService = ideaService;
     }
 
-    public void saveVote(Long ideaId, String sessionId) {
+    public Vote saveVote(Long ideaId, String sessionId) {
         Vote vote = new Vote(ideaService.getById(ideaId), sessionId);
         if (!voteRepository.findAll().contains(vote)) {
-            voteRepository.save(vote);
+            return voteRepository.save(vote);
         } else {
             throw new MultipleVotingException("You tried to vote multiple times in the same session.");
         }
