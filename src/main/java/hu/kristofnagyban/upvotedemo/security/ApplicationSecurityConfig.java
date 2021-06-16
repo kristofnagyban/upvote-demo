@@ -22,21 +22,14 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
         this.passwordEncoder = passwordEncoder;
     }
 
-    // TODO final push with final settings!
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception {
         httpSecurity
                 .csrf().disable()
-                .headers().frameOptions().disable()
-                .and()
                 .authorizeRequests()
-//                .antMatchers("/api/admin", "/api/admin/**").hasRole(Role.ADMIN.name())
-//                .antMatchers("/api/vote").hasRole(Role.BASIC.name())
-                    .antMatchers("/api/register").permitAll()
-                    .antMatchers("/db", "/db/**").permitAll()
-                .and()
-                .authorizeRequests()
-                    .antMatchers("/console/**").permitAll()
+                .antMatchers("/api/admin", "/api/admin/**").hasRole(Role.ADMIN.name())
+                .antMatchers("/api/vote", "/api/vote/**").hasRole(Role.BASIC.name())
+                .antMatchers("/api/register").permitAll()
                 .and()
                 .formLogin()
                 .and()

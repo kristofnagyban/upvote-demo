@@ -22,6 +22,7 @@ public class UserService {
     public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
+
         User admin = new User();
         admin.setUsername("admin");
         admin.setPassword(passwordEncoder.encode("admin"));
@@ -31,7 +32,7 @@ public class UserService {
 
     public boolean isUsernameAvailable(String username) {
         Optional<User> user = userRepository.findByUsername(username);
-        return !user.isPresent();
+        return user.isEmpty();
     }
 
     public Optional<User> registerUser(UserRegisterData userRegisterData) {
