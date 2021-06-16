@@ -31,12 +31,18 @@ public class AdminController extends ExceptionHandlerController {
     }
 
     @PutMapping("/idea/{id}")
-    public void approveIdea(@PathVariable Long id) {
-        ideaService.approveIdea(id);
+    public ResponseEntity<Void> approveIdea(@PathVariable Long id) {
+
+        if (ideaService.approveIdea(id).isPresent()) {
+            return new ResponseEntity<>(HttpStatus.CREATED);
+        } else {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
     }
 
     @DeleteMapping("/idea/{id}")
-    public void discardIdea(@PathVariable Long id) {
+    public ResponseEntity<Void> discardIdea(@PathVariable Long id) {
         ideaService.deleteIdea(id);
+        return new ResponseEntity<>(HttpStatus.ACCEPTED);
     }
 }

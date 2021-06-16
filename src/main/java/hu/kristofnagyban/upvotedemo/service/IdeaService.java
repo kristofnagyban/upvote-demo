@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -36,10 +37,10 @@ public class IdeaService {
         return ideaAdminInfoMapper(ideaRepository.findByApprovedFalse());
     }
 
-    public void approveIdea(Long id) {
+    public Optional<Idea> approveIdea(Long id) {
         Idea idea = ideaRepository.getById(id);
         idea.setApproved(true);
-        ideaRepository.save(idea);
+        return Optional.of(ideaRepository.save(idea));
     }
 
     public void deleteIdea(Long id) {

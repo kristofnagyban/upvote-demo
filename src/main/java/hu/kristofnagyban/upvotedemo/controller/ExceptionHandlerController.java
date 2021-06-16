@@ -14,13 +14,14 @@ public class ExceptionHandlerController {
 
     @ExceptionHandler({ DataAccessException.class })
     public ResponseEntity<String> dataExceptionHandler(DataAccessException e) {
-        log.error(e.getMessage() + e.getStackTrace());
-        return new ResponseEntity<>("A database error has occurred.", HttpStatus.INTERNAL_SERVER_ERROR);
+        log.error(e.getMessage() + e.getStackTrace().toString());
+        return new ResponseEntity<>("You have entered invalid data or a database error has occurred.",
+                HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
     @ExceptionHandler({ MultipleVotingException.class })
     public ResponseEntity<String> multipleVotingHandler(MultipleVotingException e) {
-        log.warn(e.getMessage() + e.getStackTrace());
+        log.warn(e.getMessage() + e.getStackTrace().toString());
         return new ResponseEntity<>("You tried to vote multiple times in the same session", HttpStatus.FORBIDDEN);
     }
 }
