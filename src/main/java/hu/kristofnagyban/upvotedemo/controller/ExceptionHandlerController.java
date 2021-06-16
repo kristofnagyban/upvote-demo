@@ -12,16 +12,16 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 @Controller
 public class ExceptionHandlerController {
 
-    @ExceptionHandler({ DataAccessException.class })
+    @ExceptionHandler({DataAccessException.class})
     public ResponseEntity<String> dataExceptionHandler(DataAccessException e) {
-        log.error(e.getMessage() + e.getStackTrace().toString());
+        log.error(e.getClass() + " " + e.getMessage());
         return new ResponseEntity<>("You have entered invalid data or a database error has occurred.",
                 HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
-    @ExceptionHandler({ MultipleVotingException.class })
+    @ExceptionHandler({MultipleVotingException.class})
     public ResponseEntity<String> multipleVotingHandler(MultipleVotingException e) {
-        log.warn(e.getMessage() + e.getStackTrace().toString());
+        log.warn(e.getClass() + " " + e.getMessage());
         return new ResponseEntity<>("You tried to vote multiple times in the same session", HttpStatus.FORBIDDEN);
     }
 }

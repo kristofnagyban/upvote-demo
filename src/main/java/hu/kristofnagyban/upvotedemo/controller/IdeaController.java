@@ -23,11 +23,10 @@ public class IdeaController extends ExceptionHandlerController {
 
     @PostMapping
     public ResponseEntity<Void> sendIdea(@RequestBody IdeaCreateData ideaCreateData) {
-        if(ideaService.saveIdea(ideaCreateData).isPresent()) {
+        if (ideaService.saveIdea(ideaCreateData).isPresent()) {
             return new ResponseEntity<>(HttpStatus.CREATED);
         } else {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
     }
-
 }
